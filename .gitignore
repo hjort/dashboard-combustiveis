@@ -131,4 +131,4 @@ dmypy.json
 # Outros
 entrada/
 saida/
-ca-2017-2022.csv.bz2
+*.csv.bz2
