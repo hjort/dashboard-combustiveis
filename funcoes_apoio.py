@@ -1,5 +1,13 @@
 import pandas as pd
 
+def normalizar_bandeira(titulo):
+    if titulo in ['BRANCA', 'IPIRANGA', 'RAIZEN']:
+        return titulo
+    elif titulo == 'PETROBRAS DISTRIBUIDORA S.A.':
+        return 'PETROBRAS'
+    else:
+        return 'OUTRAS'
+
 # função para retornar um dataframe preparado para uso
 def preparar_dataframe(qtd_linhas=5000):
 
@@ -17,12 +25,19 @@ def preparar_dataframe(qtd_linhas=5000):
     
     # criar coluna ano/mês da coleta
     df['ams'] = df['ano'].astype('int') * 100 + df['mes'].astype('int')
+    
+    # criar coluna data da coleta
+    df['data'] = pd.to_datetime(df['ams'], format='%Y%m')
 
     # criar colunas lucro e %lucro
     df['lucro'] = round(df['venda'] - df['compra'], 3)
     df['plucro'] = round((df['venda'] / df['compra'] - 1) * 100, 2)
-    
+
+    # normalizar bandeira do posto
+    df['bandeira'] = df['bandeira'].apply(normalizar_bandeira)
+
     return df
+
 
 '''
 def titulo(coluna):
