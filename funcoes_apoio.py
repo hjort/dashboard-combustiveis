@@ -9,10 +9,10 @@ def normalizar_bandeira(titulo):
         return 'OUTRAS'
 
 # função para retornar um dataframe preparado para uso
-def preparar_dataframe(qtd_linhas=None, agrupar=False):
+def preparar_dataframe(arquivo="ge-cv-2015-2020.csv.bz2", qtd_linhas=None, agrupar=False):
 
     # ler os dados do arquivo CSV
-    df = pd.read_csv("ge-cv-2015-2020.csv.bz2",
+    df = pd.read_csv(arquivo,
                      dtype={'regiao': 'category', 'uf': 'category', 
                             'municipio': 'category', 'bairro': 'category',
                             'produto': 'category', 'imputado': 'category',
